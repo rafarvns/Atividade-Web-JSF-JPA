@@ -5,9 +5,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class DAO {
+    EntityManagerFactory factory = null;
     public DAO(){
-        EntityManagerFactory factory = Persistence.
+        this.factory = Persistence.
                 createEntityManagerFactory("atvddwebDS");
-        factory.close();
+    }
+
+    public EntityManager getEntityManager(){
+        return factory.createEntityManager();
     }
 }

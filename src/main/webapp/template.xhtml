@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Atividade Web Unitins</title>
+    <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+
+    <b:navBar brand="Atividade Web">
+        <b:navbarLinks>
+            <b:navLink value="Gerenciar Pedidos"/>
+            <b:navLink value="Gerenciar Produtos"/>
+            <b:navLink value="Gerenciar Clientes"/>
+            <b:navLink value="Gerenciar Pagamentos"/>
+            <b:navLink value="Gerenciar Tipos de Pagamentos"/>
+        </b:navbarLinks>
+    </b:navBar>
+
+    <b:container>
+        <ui:insert name="body">
+
+        </ui:insert>
+    </b:container>
+</h:body>
+</html>

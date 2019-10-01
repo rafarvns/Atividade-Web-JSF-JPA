@@ -1,7 +1,6 @@
 package atividadewebjsf.dao;
 
 import com.querydsl.jpa.impl.JPAQuery;
-
 import javax.persistence.EntityManager;
 
 public class QueryDSLSupport {

@@ -8,17 +8,17 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>Atividade Web Unitins</title>
-    <h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
 </h:head>
 <h:body>
 
-    <b:navBar brand="Atividade Web">
+    <b:navBar brand="Atividade Web" brandHref="index.xhtml">
         <b:navbarLinks>
-            <b:navLink value="Gerenciar Pedidos"/>
-            <b:navLink value="Gerenciar Produtos"/>
-            <b:navLink value="Gerenciar Clientes"/>
-            <b:navLink value="Gerenciar Pagamentos"/>
-            <b:navLink value="Gerenciar Tipos de Pagamentos"/>
+            <b:navLink value="Gerenciar Pedidos" href="index.xhtml"/>
+            <b:navLink value="Gerenciar Produtos" href="produto.xhtml"/>
+            <b:navLink value="Gerenciar Clientes" href="cliente.xhtml"/>
+            <b:navLink value="Gerenciar Pagamentos" href="pagamento.xhtml"/>
+            <b:navLink value="Gerenciar Tipos de Pagamentos" href="tipopagamento.xhtml"/>
         </b:navbarLinks>
     </b:navBar>
 

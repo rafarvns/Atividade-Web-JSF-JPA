@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Atividade Web Unitins - Gerenciar Produtos</title>
+    <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+</h:head>
+
+<ui:composition template="template.xhtml">
+    <ui:define name="body">
+        <div class="col-12" align="center">
+            <h2 class="text text-primary">
+                Gerenciar Produtos
+            </h2>
+        </div>
+
+        <div class="col-12" align="right" style="margin-bottom: 6px;">
+            <b:button look="success" icon="plus" value="Adicionar Produto" onclick="$('.modalAdd').modal()"/>
+            <div align="left">
+                <b:modal id="amodaladd" title="Adicionar Produto" styleClass="modalAdd" size="modal-lg">
+                    <h:form style="display: inline" styleClass="col-12">
+                        <b:container fluid="true">
+                            <b:row>
+                                <b:column medium-screen="9">
+                                    <h3>Nome *</h3>
+                                    <b:inputText placeholder="Digite o nome do produto"
+                                                 value="#{beanProduto.produto.nome}"/>
+                                </b:column>
+                                <b:column medium-screen="3">
+                                    <h3>Valor *</h3>
+                                    <b:inputText placeholder="Digite o valor do produto" mask="numeric"
+                                                 value="#{beanProduto.produto.valor}"/>
+                                </b:column>
+                            </b:row>
+                        </b:container>
+                        <hr/>
+                        <div align="right" class="row" style="padding: 2px; margin-right: 1px;">
+                            <b:button value="Cancelar" look="secondary" dismiss="modal" style="margin-right: 4px;"/>
+                            <b:commandButton value="Salvar" look="success"
+                                             action="#{beanProduto.adicionarAtualizarProduto}"/>
+                        </div>
+                    </h:form>
+                </b:modal>
+            </div>
+        </div>
+        <b:panel title="Lista de Produtos" collapsible="false">
+            <p:dataList value="#{beanProduto.produtos}" var="produto" type="unordered" itemType="none"
+                        emptyMessage="Não há nenhum Produto cadastrado."
+                        paginator="true" rows="10" styleClass="paginated col-12" paginatorPosition="bottom">
+                <b:container fluid="true" style="padding: 2px;">
+                    <b:row style="margin-right: 24px; background-color: #{beanProduto.getRowIndex(produto.id)%2==0?'#fff':'#F2F5F9'}">
+                        <b:column mediumScreen="7">
+                            <h:outputText styleClass="text" style="font-size: large" value="#{produto.nome}"/>
+                        </b:column>
+                        <b:column mediumScreen="3">
+                            <h:outputText styleClass="text" style="font-size: large" value="#{produto.valor}"/>
+                        </b:column>
+                        <b:column mediumScreen="2">
+                            <div align="right">
+                                <b:buttonGroup>
+                                    <b:button look="danger" icon="trash" onclick="$('.modalDelete').modal()"/>
+                                    <h:form style="display: inline">
+                                        <b:commandButton look="primary" icon="pencil"
+                                                         actionListener="#{beanProduto.addProduto(produto)}"/>
+                                    </h:form>
+                                </b:buttonGroup>
+                            </div>
+                            <b:modal id="amodal" title="Excluir" styleClass="modalDelete">
+                                <p>Deseja excluir este Produto?</p>
+                                <f:facet name="footer">
+                                    <b:button value="Não" look="secondary" dismiss="modal"/>
+                                    <h:form style="display: inline">
+                                        <b:commandButton value="Sim" look="danger" dismiss="modal"
+                                                         action="#{beanProduto.deleteProduto(produto)}"/>
+                                    </h:form>
+                                </f:facet>
+                            </b:modal>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </p:dataList>
+        </b:panel>
+        <p:growl id="growl" showDetail="true" sticky="false" life="2500"/>
+    </ui:define>
+</ui:composition>
+
+</html>

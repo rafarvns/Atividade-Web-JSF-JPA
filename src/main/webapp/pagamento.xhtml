@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Atividade Web Unitins - Gerenciar Pagamento</title>
+    <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+</h:head>
+
+<ui:composition template="template.xhtml">
+    <ui:define name="body">
+        <div class="col-12" align="center">
+            <h2 class="text text-primary">
+                Lista de Pagamentos
+            </h2>
+        </div>
+        <br/>
+        <b:panel title="Lista de Pagamentos Realizados" collapsible="false">
+            <p:dataList value="#{beanPagamento.pagamentos}" var="pags" type="unordered" itemType="none"
+                        emptyMessage="Não há nenhum Pagamento cadastrado."
+                        paginator="true" rows="10" styleClass="paginated col-12" paginatorPosition="bottom">
+                <b:container fluid="true" style="padding: 2px;">
+                    <b:row style="margin-right: 24px; background-color: #{beanPagamento.getRowIndex(pags.id)%2==0?'#fff':'#F2F5F9'}">
+                        <b:column mediumScreen="12">
+                            <h:outputText styleClass="text" style="font-size: large" value="#{pags.dataConvertida}   #{pags.tipoPagamento.descricao}"/>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </p:dataList>
+        </b:panel>
+
+    </ui:define>
+</ui:composition>
+
+</html>

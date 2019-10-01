@@ -66,9 +66,18 @@ public class ImplPedido {
             this.entityManager.getTransaction().begin();
             this.entityManager.merge(pedido);
             this.entityManager.getTransaction().commit();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "O Pedido foi atualizado com sucesso!"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "O Pedido foi pago com sucesso!"));
         }catch (Exception e){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Houve um erro ao tentar atualizar o Pedido!"));
+        }
+    }
+
+    public Pedido getPedidoById(Long id) {
+        try{
+            Pedido p = this.entityManager.find(Pedido.class, id);
+            return p;
+        }catch (Exception e){
+            return null;
         }
     }
 }

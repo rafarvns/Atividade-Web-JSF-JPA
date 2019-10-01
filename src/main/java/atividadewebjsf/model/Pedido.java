@@ -32,7 +32,7 @@ public class Pedido implements Serializable {
             foreignKey = @ForeignKey(name="FK_PAGAMENTO_IN_PEDIDO"))
     private Pagamento pagamento;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="pedido_produto", joinColumns=
             {@JoinColumn(name="id_pedido")}, inverseJoinColumns=
             {@JoinColumn(name="id_produto")})

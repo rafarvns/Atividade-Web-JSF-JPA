@@ -37,4 +37,8 @@ public class CtrlPedido {
     public void atualizaPedido(FacesContext context, Pedido pedido) {
         this.implPedido.atualizaPedido(context, pedido);
     }
+
+    public Pedido getPedidoById(Long id) {
+        return this.implPedido.getPedidoById(id);
+    }
 }

@@ -1,10 +1,12 @@
 package atividadewebjsf.bean;
 
 import atividadewebjsf.controller.CtrlCliente;
+import atividadewebjsf.controller.CtrlPagamento;
 import atividadewebjsf.controller.CtrlPedido;
 import atividadewebjsf.model.*;
 import org.primefaces.context.RequestContext;
 
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -14,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class BeanPedido {
 
     private Pedido pedido = null;
@@ -22,10 +24,13 @@ public class BeanPedido {
     private Produto produto = null;
     private TipoPagamento tipoPagamento = null;
     private CtrlPedido ctrlPedido = null;
+    private CtrlPagamento ctrlPagamento = null;
     private List<Produto> lstProduto = null;
+    private Long idPedido = null;
 
     public BeanPedido(){
         this.ctrlPedido = new CtrlPedido();
+        this.ctrlPagamento = new CtrlPagamento();
         this.pedido = new Pedido();
         this.cliente = new Cliente();
         this.produto = new Produto();
@@ -46,17 +51,30 @@ public class BeanPedido {
         return 0;
     }
 
-    public void adicionarAtualizarPedido(){
+    public String adicionarAtualizarPedido(){
         FacesContext context = FacesContext.getCurrentInstance();
         this.pedido.setCliente(this.cliente);
         this.pedido.setProdutos(this.lstProduto);
-        Pagamento pag =new Pagamento();
-        pag.setTipoPagamento(this.tipoPagamento);
-        this.pedido.setPagamento(pag);
         this.pedido.setData(new Date());
-        if(this.pedido.getId()!=null) this.ctrlPedido.atualizaPedido(context, this.pedido);
+        if(this.pedido.getId()!=null) {
+            this.pedido = this.ctrlPedido.getPedidoById(this.pedido.getId());
+            Pagamento pag =new Pagamento();
+            pag.setTipoPagamento(this.tipoPagamento);
+            pag.setData(new Date());
+            pag = this.ctrlPagamento.salvaPagamento(context, pag);
+            this.pedido.setPagamento(pag);
+            this.ctrlPedido.atualizaPedido(context, this.pedido);
+            this.idPedido = this.pedido.getId();
+            return "report.xhtml";
+        }
         else this.ctrlPedido.salvaPedido(context, this.pedido);
         this.pedido = new Pedido();
+        return "";
+    }
+
+    public Pedido getListPedidoById(){
+        this.pedido = this.ctrlPedido.getPedidoById(this.pedido.getId());
+        return this.pedido;
     }
 
     public void deletePedido(Pedido pedido) {

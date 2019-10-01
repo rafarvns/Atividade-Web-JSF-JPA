@@ -26,8 +26,6 @@ public class Pagamento implements Serializable {
 
     @Column
     @NotNull(message = "O campo Data não pode estar vazio!")
-    @NotBlank(message = "O campo Data não pode estar vazio!")
-    @NotEmpty(message = "O campo Data não pode estar vazio!")
     private Date data;
 
     @ManyToOne

@@ -1,7 +1,6 @@
 package atividadewebjsf.domain.period;
 
 import atividadewebjsf.domain.discipline.Discipline;
-import atividadewebjsf.domain.discipline.DisciplineCtrl;
 import atividadewebjsf.domain.period.Period;
 import lombok.Data;
 import org.primefaces.context.RequestContext;
@@ -27,8 +26,8 @@ public class PeriodBean implements Serializable {
 
     public void addDisciplines() {
         List<Discipline> lstDisc = period.getDisciplines();
-        DisciplineCtrl disciplineCtrl = new DisciplineCtrl(discipline);
-        Discipline disc = disciplineCtrl.getOne(discipline.getId());
+        Discipline disc = new Discipline();
+        disc.setId(discipline.getId());
         lstDisc.add(disc);
         period.setDisciplines(lstDisc);
         return;

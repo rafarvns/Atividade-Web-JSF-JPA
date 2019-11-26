@@ -24,7 +24,7 @@ public class Period extends DefaultEntity {
     @NotEmpty(message = "O campo Nome não pode estar vazio!")
     private String name;
 
-    @OneToMany(targetEntity = Discipline.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Discipline.class, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Discipline> disciplines;
 
     public Period() {

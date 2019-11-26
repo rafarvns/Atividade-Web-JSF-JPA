@@ -2,6 +2,7 @@ package atividadewebjsf.domain.discipline;
 
 import atividadewebjsf.abstraction.QueryDslAndJPASupport;
 import atividadewebjsf.domain.discipline.QDiscipline;
+import com.querydsl.jpa.JPAQueryBase;
 
 import java.util.List;
 
@@ -16,11 +17,10 @@ public class DisciplineCtrl extends QueryDslAndJPASupport {
 
     public Discipline getOne(Long id) {
         QDiscipline discipline = QDiscipline.discipline;
-        return (Discipline) getQueryDSL()
+        JPAQueryBase query = (JPAQueryBase) getQueryDSL()
                 .select(discipline)
-                .from(discipline)
-                .on(discipline.id.eq(id))
-                .fetchOne();
+                .where(discipline.id.eq(id));
+        return (Discipline) query.fetchOne();
 
     }
 

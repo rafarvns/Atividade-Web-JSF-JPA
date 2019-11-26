@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Gerenciar Matrizes Curriculares</title>
+    <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+</h:head>
+
+<ui:composition template="../template.xhtml">
+    <ui:define name="body">
+        <div class="col-12" align="center">
+            <h2 class="text text-primary">
+                Gerenciar Matrizes Curriculares
+            </h2>
+        </div>
+
+        <div class="col-12" align="right" style="margin-bottom: 6px;">
+            <h:form style="display: inline">
+                <b:commandButton look="success" icon="plus" value="Adicionar Nova Matriz Curricular"
+                                 actionListener="#{curriculumBean.newCurriculum()}"/>
+            </h:form>
+            <div align="left">
+                <b:modal id="amodaladd" title="Adicionar Nova Matriz Curricular" styleClass="modalAdd" size="modal-lg">
+                    <h:form style="display: inline" styleClass="col-12" id="form_new_curriculum">
+                        <h3>Nome *</h3>
+                        <b:inputText placeholder="Digite o nome da Matriz Curricular"
+                                     value="#{curriculumBean.curriculum.name}"/>
+                        <h3>Instituição *</h3>
+
+                            <b:selectOneMenu required="true"
+                                             value="#{curriculumBean.curriculum.course.institution.id}">
+                                <f:selectItem itemValue="#{null}" itemLabel="Selecione uma Instituição" />
+                                <f:selectItems value="#{institutionBean.allInstitution}" var="inst"
+                                               itemLabel="#{inst.name}"
+                                               itemValue="#{inst.id}"/>
+                                <f:ajax event="change" render="form_new_curriculum"/>
+                            </b:selectOneMenu>
+
+                        <h3>Curso *</h3>
+
+                            <b:selectOneMenu required="true" disabled="#{curriculumBean.checkIfSelectedInstitution}"
+                                             value="#{curriculumBean.curriculum.course.id}">
+                                <f:selectItem itemValue="#{null}" itemLabel="Selecione um Curso" />
+                                <f:selectItems value="#{curriculumBean.allCourses}" var="cour"
+                                               itemLabel="#{cour.name}"
+                                               itemValue="#{cour.id}"/>
+                            </b:selectOneMenu>
+
+                        <hr/>
+                        <div align="right" class="row" style="padding: 2px; margin-right: 1px;">
+                            <b:button value="Cancelar" look="secondary" dismiss="modal" style="margin-right: 4px;"/>
+                            <b:commandButton value="Salvar" look="success"
+                                             action="#{curriculumBean.saveCurriculum}"/>
+                        </div>
+                    </h:form>
+                </b:modal>
+            </div>
+        </div>
+        <b:panel title="Lista de Matrizes Curriculares" collapsible="false">
+            <p:dataList value="#{curriculumBean.allCurriculum}" var="curriculum" type="unordered" itemType="none"
+                        emptyMessage="Não há nenhuma Matriz Curricular cadastrada."
+                        paginator="true" rows="10" styleClass="paginated col-12" paginatorPosition="bottom">
+                <b:container fluid="true" style="padding: 2px;">
+                    <b:row style="margin-right: 24px; background-color: #{curriculumBean.getRowIndex(curriculum.id)%2==0?'#fff':'#F2F5F9'}">
+                        <b:column mediumScreen="4">
+                            <h:outputText styleClass="text" style="font-size: large" value="#{curriculum.name}"/>
+                        </b:column>
+                        <b:column mediumScreen="3">
+                            <h:outputText styleClass="text" style="font-size: large"
+                                          value="#{curriculum.course.name}"/>
+                        </b:column>
+                        <b:column mediumScreen="3">
+                            <h:outputText styleClass="text" style="font-size: large"
+                                          value="#{curriculum.course.institution.name}"/>
+                        </b:column>
+                        <b:column mediumScreen="2">
+                            <div align="right">
+                                <b:button look="danger" icon="trash" onclick="$('.modalDelete').modal()"/>
+                                <h:form style="display: inline">
+                                    <b:commandButton look="primary" icon="pencil"
+                                                     actionListener="#{curriculumBean.updateCurriculum(curriculum)}"/>
+                                </h:form>
+                            </div>
+                            <b:modal id="amodal" title="Excluir" styleClass="modalDelete">
+                                <p>Deseja excluir esta Matriz Curricular?</p>
+                                <f:facet name="footer">
+                                    <b:button value="Não" look="secondary" dismiss="modal"/>
+                                    <h:form style="display: inline">
+                                        <b:commandButton value="Sim" look="danger" dismiss="modal"
+                                                         action="#{curriculumBean.deleteCurriculum(curriculum)}"/>
+                                    </h:form>
+                                </f:facet>
+                            </b:modal>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </p:dataList>
+        </b:panel>
+        <p:growl id="growl" showDetail="true" sticky="false" life="2500"/>
+
+    </ui:define>
+</ui:composition>
+
+</html>

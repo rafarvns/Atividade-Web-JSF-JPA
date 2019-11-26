@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:b="http://bootsfaces.net/ui">
 <h:head>
-    <title>Atividade Web Unitins</title>
+    <title>Avaliação Web II Unitins</title>
     <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
 </h:head>
 <h:body>
 
-    <b:navBar brand="Atividade Web" brandHref="index.xhtml">
+    <b:navBar brand="Sistema Acadêmico" brandHref="index.xhtml">
         <b:navbarLinks>
-            <b:navLink value="Gerenciar Pedidos" href="index.xhtml"/>
-            <b:navLink value="Gerenciar Produtos" href="produto.xhtml"/>
-            <b:navLink value="Gerenciar Clientes" href="cliente.xhtml"/>
-            <b:navLink value="Gerenciar Pagamentos" href="pagamento.xhtml"/>
-            <b:navLink value="Gerenciar Tipos de Pagamentos" href="tipopagamento.xhtml"/>
+            <b:dropMenu value="Gerenciar Entidades" iconAwesome="pencil">
+                <h:form>
+                    <b:navCommandLink value="Instituições" action="#{navigationBean.toInstitutions}"/>
+                    <b:navCommandLink value="Cursos" action="#{navigationBean.toCourses}"/>
+                    <b:navCommandLink value="Semestres" action="#{navigationBean.toHalfs}"/>
+                    <b:navCommandLink value="Professores" action="#{navigationBean.toTeachers}"/>
+                    <b:navCommandLink value="Estudantes" action="#{navigationBean.toStudents}"/>
+                    <b:navCommandLink value="Matrizes Curriculares" action="#{navigationBean.toCurriculums}"/>
+                    <b:navCommandLink value="Disciplinas" action="#{navigationBean.toDisciplines}"/>
+                    <b:navCommandLink value="Notas" action="#{navigationBean.toNotations}"/>
+                    <b:navCommandLink value="Frequências" action="#{navigationBean.toFrequencies}"/>
+                </h:form>
+            </b:dropMenu>
         </b:navbarLinks>
     </b:navBar>
 

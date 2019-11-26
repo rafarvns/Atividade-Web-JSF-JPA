@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Gerenciar Frequências</title>
+    <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+</h:head>
+
+<ui:composition template="../template.xhtml">
+    <ui:define name="body">
+        <div class="col-12" align="center">
+            <h2 class="text text-primary">
+                Gerenciar Frequências
+            </h2>
+        </div>
+
+        <div class="col-12" align="right" style="margin-bottom: 6px;">
+            <h:form style="display: inline">
+                <b:commandButton look="success" icon="plus" value="Adicionar Nova Nota"
+                                 actionListener="#{frequencyBean.newFrequency()}"/>
+            </h:form>
+            <div align="left">
+                <b:modal id="amodaladd" title="Adicionar Nova Nota" styleClass="modalAdd" size="modal-lg">
+                    <h:form style="display: inline" styleClass="col-12">
+                        <h3>Nota 1 *</h3>
+                        <b:inputText placeholder="Digite o valor da Nota"
+                                     value="#{frequencyBean.frequency.frequency1}"/>
+                        <h3>Nota 2 *</h3>
+                        <b:inputText placeholder="Digite o valor da Nota"
+                                     value="#{frequencyBean.frequency.frequency2}"/>
+                        <h3>Exame *</h3>
+                        <b:inputText placeholder="Digite o valor do Exame"
+                                     value="#{frequencyBean.frequency.test}"/>
+                        <h3>Aluno *</h3>
+                        <b:formGroup>
+                            <b:selectOneMenu required="true"
+                                             value="#{frequencyBean.frequency.registration.id}">
+                                <f:selectItems value="#{registrationBean.allRegistration}" var="regs"
+                                               itemLabel="#{regs.student.name}"
+                                               itemValue="#{regs.id}"/>
+                            </b:selectOneMenu>
+                        </b:formGroup>
+                        <hr/>
+                        <div align="right" class="row" style="padding: 2px; margin-right: 1px;">
+                            <b:button value="Cancelar" look="secondary" dismiss="modal" style="margin-right: 4px;"/>
+                            <b:commandButton value="Salvar" look="success"
+                                             action="#{frequencyBean.saveFrequency}"/>
+                        </div>
+                    </h:form>
+                </b:modal>
+            </div>
+        </div>
+        <b:panel title="Lista de Frequências" collapsible="false">
+            <p:dataList value="#{frequencyBean.allFrequency}" var="frequency" type="unordered" itemType="none"
+                        emptyMessage="Não há nenhuma Nota cadastrada."
+                        paginator="true" rows="10" styleClass="paginated col-12" paginatorPosition="bottom">
+                <b:container fluid="true" style="padding: 2px;">
+                    <b:row style="margin-right: 24px; background-color: #{frequencyBean.getRowIndex(frequency.id)%2==0?'#fff':'#F2F5F9'}">
+                        <b:column mediumScreen="3">
+                            <h:outputText styleClass="text" style="font-size: large" value="#{frequency.registration.student.name}"/>
+                        </b:column>
+                        <b:column mediumScreen="2">
+                            <h:outputText styleClass="text" style="font-size: large"
+                                          value="#{frequency.date.toString}"/>
+                        </b:column>
+                        <b:column mediumScreen="2">
+                            <h:outputText styleClass="text" style="font-size: large"
+                                          value="#{frequency.startTime.toString}"/>
+                        </b:column>
+                        <b:column mediumScreen="2">
+                            <h:outputText styleClass="text" style="font-size: large"
+                                          value="#{frequency.endTime.toString}"/>
+                        </b:column>
+                        <b:column mediumScreen="1">
+                            <h:outputText styleClass="text" style="font-size: large"
+                                          value="#{frequency.registration.student.name}"/>
+                        </b:column>
+                        <b:column mediumScreen="2">
+                            <div align="right">
+                                <b:button look="danger" icon="trash" onclick="$('.modalDelete').modal()"/>
+                                <h:form style="display: inline">
+                                    <b:commandButton look="primary" icon="pencil"
+                                                     actionListener="#{frequencyBean.updateFrequency(frequency)}"/>
+                                </h:form>
+                            </div>
+                            <b:modal id="amodal" title="Excluir" styleClass="modalDelete">
+                                <p>Deseja excluir esta Nota?</p>
+                                <f:facet name="footer">
+                                    <b:button value="Não" look="secondary" dismiss="modal"/>
+                                    <h:form style="display: inline">
+                                        <b:commandButton value="Sim" look="danger" dismiss="modal"
+                                                         action="#{frequencyBean.deleteFrequency(frequency)}"/>
+                                    </h:form>
+                                </f:facet>
+                            </b:modal>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </p:dataList>
+        </b:panel>
+        <p:growl id="growl" showDetail="true" sticky="false" life="2500"/>
+
+    </ui:define>
+</ui:composition>
+
+</html>

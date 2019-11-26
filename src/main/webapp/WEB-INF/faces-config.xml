@@ -9,12 +9,42 @@
         <navigation-case>
             <from-outcome>go-to-index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
-            <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>go-to-tipopagamento</from-outcome>
-            <to-view-id>/tipopagamento.xhtml</to-view-id>
-            <redirect/>
+            <from-outcome>go-to-institutions</from-outcome>
+            <to-view-id>/pages/institutions.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-courses</from-outcome>
+            <to-view-id>/pages/courses.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-halfs</from-outcome>
+            <to-view-id>/pages/halfs.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-teachers</from-outcome>
+            <to-view-id>/pages/teachers.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-students</from-outcome>
+            <to-view-id>/pages/students.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-curriculums</from-outcome>
+            <to-view-id>/pages/curriculums.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-disciplines</from-outcome>
+            <to-view-id>/pages/disciplines.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-notations</from-outcome>
+            <to-view-id>/pages/notations.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-frequencies</from-outcome>
+            <to-view-id>/pages/frequencies.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

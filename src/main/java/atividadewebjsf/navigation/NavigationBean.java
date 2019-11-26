@@ -47,4 +47,8 @@ public class NavigationBean implements Serializable {
     public String toFrequencies() {
         return "go-to-frequencies";
     }
+
+    public String toPeriods() {
+        return "go-to-periods";
+    }
 }

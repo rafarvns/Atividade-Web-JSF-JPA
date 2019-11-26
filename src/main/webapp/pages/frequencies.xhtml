@@ -28,14 +28,14 @@
                 <b:modal id="amodaladd" title="Adicionar Nova Nota" styleClass="modalAdd" size="modal-lg">
                     <h:form style="display: inline" styleClass="col-12">
                         <h3>Nota 1 *</h3>
-                        <b:inputText placeholder="Digite o valor da Nota"
-                                     value="#{frequencyBean.frequency.frequency1}"/>
+                        <b:inputText placeholder="Digite o valor da data"
+                                     value="#{frequencyBean.frequency.date}"/>
                         <h3>Nota 2 *</h3>
-                        <b:inputText placeholder="Digite o valor da Nota"
-                                     value="#{frequencyBean.frequency.frequency2}"/>
+                        <b:inputText placeholder="Digite o valor da hora de entrada"
+                                     value="#{frequencyBean.frequency.startTime}"/>
                         <h3>Exame *</h3>
-                        <b:inputText placeholder="Digite o valor do Exame"
-                                     value="#{frequencyBean.frequency.test}"/>
+                        <b:inputText placeholder="Digite o valor da hora de saída"
+                                     value="#{frequencyBean.frequency.endTime}"/>
                         <h3>Aluno *</h3>
                         <b:formGroup>
                             <b:selectOneMenu required="true"

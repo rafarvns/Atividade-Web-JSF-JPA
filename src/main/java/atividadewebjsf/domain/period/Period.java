@@ -8,13 +8,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "PERIOD")
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-@NoArgsConstructor
 @AllArgsConstructor
 public class Period extends DefaultEntity {
 
@@ -26,5 +26,9 @@ public class Period extends DefaultEntity {
 
     @OneToMany(targetEntity = Discipline.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Discipline> disciplines;
+
+    public Period() {
+        this.disciplines = new ArrayList<Discipline>();
+    }
 
 }

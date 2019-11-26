@@ -46,6 +46,10 @@
             <from-outcome>go-to-frequencies</from-outcome>
             <to-view-id>/pages/frequencies.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>go-to-periods</from-outcome>
+            <to-view-id>/pages/periods.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
 
 </faces-config>
